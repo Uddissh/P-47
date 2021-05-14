@@ -13,7 +13,7 @@ var gameOver
 var reStart
 function preload(){
   
-  trex = loadImage("bike.gif");
+  trex = loadImage("images.png");
   
   groundImage = loadImage("ground2.png");
   
@@ -62,7 +62,7 @@ function setup() {
 }
 
 function draw() {
-  background(180);
+  background("white");//180
   text("Score: "+ score, 0,70);
   if (gameState === PLAY) {
    ground.velocityX = -(6+3*score/100);
