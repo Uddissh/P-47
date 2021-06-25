@@ -46,7 +46,6 @@ function setup() {
 
   invisibleGround = createSprite(200,350,1700,10);
   invisibleGround.visible = true;
-  invisibleGround.debug = false;
   
   gameOver = createSprite(0, 250);
   gameOver.addImage(gameOverImg);
@@ -61,6 +60,7 @@ function setup() {
   obstaclesGroup = new Group();
   
   score = 0;
+  
   
   camera.x = trex.x - 20;
   camera.y = trex.y - 20;
