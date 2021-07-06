@@ -13,11 +13,13 @@ var score, back1, back2;
 
 var wow, ohno;
 
+var ani;
+
 var gameOver
 var reStart
 function preload(){
   
-  trexIMG = loadImage("images.png");
+  ani = loadAnimation("ani1.jpg","ani2.jpg","ani3.jpg","ani4.jpg","ani5.jpg","ani6.jpg","ani7.jpg","ani8.jpg","ani9.jpg","ani10.jpg","ani11.jpg","ani12.jpg")
 
   back1 = loadImage("First.jpg");
 
@@ -40,12 +42,12 @@ function preload(){
 function setup() {
   createCanvas(1700, 500);
   
-  trex = createSprite(50,300,20,50);
-  trex.addImage("images.png");
-  trex.scale = 2;
+  trex = createSprite(50,400,20,20);
+  trex.addAnimation("go", ani)
+  trex.scale = 1.3;
 
   invisibleGround = createSprite(200,350,1700,10);
-  invisibleGround.visible = true;
+  invisibleGround.visible = false; 
   
   gameOver = createSprite(0, 250);
   gameOver.addImage(gameOverImg);
@@ -60,7 +62,6 @@ function setup() {
   obstaclesGroup = new Group();
   
   score = 0;
-  
   
   camera.x = trex.x - 20;
   camera.y = trex.y - 20;
@@ -80,7 +81,7 @@ function draw() {
   
   score = score + Math.round(getFrameRate()/60);
   
-  if (score === 100) {
+  if (score % 100 === 0) {
     
    wow.play();
 
@@ -90,7 +91,7 @@ function draw() {
     trex.velocityY = -10;
   }
   
-  trex.velocityY = trex.velocityY + 0.8;
+  trex.velocityY = trex.velocityY + 2.5;
   
   if (back1.x < 0 && background === back1){
     back1.x = back1.width/2;
@@ -101,16 +102,17 @@ function draw() {
   }
 
   trex.collide(invisibleGround);
-// the end state will come when the play state is over //
+
   spawnObstacles();
 
     if (obstaclesGroup.isTouching(trex)) {
      gameState = END;   
     }
-  }else if(gameState === END) {
+  }
+  else if(gameState === END) {
     gameOver.visible = true;
     reStart.visible = true;
-    ohno.play();
+    
     obstaclesGroup.setVelocityXEach(0);
     
     //set lifetime of the game objects so that they are never destroyed
@@ -135,10 +137,13 @@ function reset(){
   score = 0;
   
 }
+//i want to addanimation()to this project is it ok?
+//cause i want to upgrade
+//mine is good and craft is better and minecraft is the best
 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(1000,350,10,40);
+    var obstacle = createSprite(1200,450,10,10);
     obstacle.velocityX = -(6+3*score/100);
     
     //generate random obstacles
@@ -160,7 +165,7 @@ function spawnObstacles() {
     }
     
     //assign scale and lifetime to the obstacle           
-    obstacle.scale = 0.2;
+    obstacle.scale = 0.15;
     obstacle.lifetime = 400;
     //add each obstacle to the group
     obstaclesGroup.add(obstacle);
