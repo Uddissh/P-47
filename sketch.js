@@ -1,3 +1,4 @@
+// the variables are now starting 
 var PLAY = 1;
 var END = 0;
 var gameState = PLAY;
@@ -5,18 +6,14 @@ var trexIMG, trex;
 var ground;
 var invisibleGround;
 var groundImage;
-
 var cloudsGroup, cloudImage;
 var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6;
-
 var score, back1, back2;
-
 var wow, ohno;
-
 var ani;
-
-var gameOver
-var reStart
+var gameOver;
+var reStart;
+// the function preload is now starting 
 function preload(){
   
   ani = loadAnimation("ani1.jpg","ani2.jpg","ani3.jpg","ani4.jpg","ani5.jpg","ani6.jpg","ani7.jpg","ani8.jpg","ani9.jpg","ani10.jpg","ani11.jpg","ani12.jpg")
@@ -38,11 +35,11 @@ function preload(){
   gameOverImg = loadImage("gameOver.png");
   reStartImg = loadImage("restart.png");
 }
-
+// the function setup is now starting 
 function setup() {
   createCanvas(1700, 500);
   
-  trex = createSprite(50,400,20,20);
+  trex = createSprite(50,470,20,20);
   trex.addAnimation("go", ani)
   trex.scale = 1.3;
 
@@ -66,7 +63,7 @@ function setup() {
   camera.x = trex.x - 20;
   camera.y = trex.y - 20;
 }
-
+// the function draw is now starting 
 function draw() {
   background(back1);
   
@@ -137,10 +134,7 @@ function reset(){
   score = 0;
   
 }
-//i want to addanimation()to this project is it ok?
-//cause i want to upgrade
-//mine is good and craft is better and minecraft is the best
-
+// the function spawn obstacles is now starting 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
     var obstacle = createSprite(1200,450,10,10);
