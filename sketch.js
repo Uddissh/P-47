@@ -1,4 +1,3 @@
-// the variables are now starting 
 var PLAY = 1;
 var END = 0;
 var gameState = PLAY;
@@ -11,15 +10,13 @@ var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obsta
 var score, back1, back2;
 var wow, ohno;
 var ani;
-var gameOver;
-var reStart;
-// the function preload is now starting 
+var gameOver
+var reStart
 function preload(){
   
   ani = loadAnimation("ani1.jpg","ani2.jpg","ani3.jpg","ani4.jpg","ani5.jpg","ani6.jpg","ani7.jpg","ani8.jpg","ani9.jpg","ani10.jpg","ani11.jpg","ani12.jpg")
 
   back1 = loadImage("First.jpg");
-
   back2 = loadImage("Second.jpg");
   
   obstacle1 = loadImage("stone.png");
@@ -35,18 +32,20 @@ function preload(){
   gameOverImg = loadImage("gameOver.png");
   reStartImg = loadImage("restart.png");
 }
-// the function setup is now starting 
+
 function setup() {
   createCanvas(1700, 500);
   
-  trex = createSprite(50,470,20,20);
-  trex.addAnimation("go", ani)
+  trex = createSprite(200,400,20,20);
+  trex.addAnimation("go", ani);
   trex.scale = 1.3;
+  //trex.debug = true;
 
-  invisibleGround = createSprite(200,350,1700,10);
+  invisibleGround = createSprite(200,480,1700,10);
   invisibleGround.visible = false; 
-  
-  gameOver = createSprite(0, 250);
+  //invisibleGround.debug = true;
+
+  gameOver = createSprite(850, 250);
   gameOver.addImage(gameOverImg);
   gameOver.visible = false;
   gameOver.scale = 0.5;
@@ -60,10 +59,10 @@ function setup() {
   
   score = 0;
   
-  camera.x = trex.x - 20;
-  camera.y = trex.y - 20;
+  //camera.x = trex.x - 20;
+  //camera.y = trex.y - 20;
 }
-// the function draw is now starting 
+
 function draw() {
   background(back1);
   
@@ -71,23 +70,29 @@ function draw() {
   invisibleGround.velocityX = 0;
   trex.velocityY = 0;
 
-  text("Score: "+ score, 0,70);
+  if (invisibleGround.x < 0){
+    invisibleGround.x = invisibleGround.width/2;
+  }
+
+  text("Score: "+ score, 850,70);
   if (gameState === PLAY) {
     invisibleGround.velocityX = -(6+3*score/100);
       
   
   score = score + Math.round(getFrameRate()/60);
   
-  if (score % 100 === 0) {
+  if (score % 90 === 0) {
     
    wow.play();
 
   }
   
-  if(keyDown("space")) {
-    trex.velocityY = -10;
+  if(keyDown("space") && invisibleGround.isTouching(trex)) {
+    trex.velocityY = -150;
   }
   
+  console.log(trex.x);
+
   trex.velocityY = trex.velocityY + 2.5;
   
   if (back1.x < 0 && background === back1){
@@ -134,11 +139,14 @@ function reset(){
   score = 0;
   
 }
-// the function spawn obstacles is now starting 
+//i want to addanimation()to this project is it ok?
+//cause i want to upgrade
+//mine is good and craft is better and minecraft is the best
+
 function spawnObstacles() {
-  if(frameCount % 60 === 0) {
-    var obstacle = createSprite(1200,450,10,10);
-    obstacle.velocityX = -(6+3*score/100);
+  if(frameCount % 90 === 0) {
+    var obstacle = createSprite(1800,450,20,20);
+    obstacle.velocityX = -(8+3*score/100);
     
     //generate random obstacles
     var rand = Math.round(random(1,6));
@@ -163,5 +171,6 @@ function spawnObstacles() {
     obstacle.lifetime = 400;
     //add each obstacle to the group
     obstaclesGroup.add(obstacle);
+    obstaclesGroup.debug = false;
   }
 }
