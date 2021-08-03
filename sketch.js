@@ -50,9 +50,9 @@ function setup() {
   gameOver.visible = false;
   gameOver.scale = 0.5;
   
-  reStart = createSprite(300, 150);
+  reStart = createSprite(850, 350);
   reStart.addImage(reStartImg);
-  reStart.scale = 0;
+  reStart.scale = 0.5;
   reStart.visible = false;
 
   obstaclesGroup = new Group();
@@ -132,7 +132,7 @@ function reset(){
   gameState = PLAY;
   
   gameOver.visible = false;
-  restart.visible = false;
+  reStart.visible = false;
   
   obstaclesGroup.destroyEach();
   
